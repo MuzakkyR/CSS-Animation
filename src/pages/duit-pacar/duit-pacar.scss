@@ -1,0 +1,142 @@
+page-duit-pacar {
+
+    $atas:-65px;
+    $tengah:0px;
+    $bawah:65px;
+    $kiri:150px;
+    $kanan:450px;
+
+    %animasi{
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(1, 0, 0, 1);
+    }
+
+    .wrapper{
+        position: absolute;
+        top: 50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        width: 600px;
+        .container{
+            position: relative;
+            display: flex;
+            div{
+                position: absolute;
+                width: 150px;
+                height: 65px;
+                p{
+                    font-size: 4em;
+                    text-align: center;
+                    margin:0;
+                }
+            }
+            .static-a{
+                left:0px;
+                background: #000;
+                color: #fff;
+            }
+            .static-b{
+                left:300px;
+                background: #000;
+                color: #fff;
+            }
+            .move-a{
+                animation-name: move-a;
+                @extend %animasi;
+            }
+            .move-b{
+                animation-name: move-b;
+                @extend %animasi;
+            }
+            @keyframes move-a{
+                0%{
+                    top: $tengah;
+                    left: $kiri;
+                    background: black;
+                    color: white;
+                }
+                10%{
+                    top: $atas;
+                    left: $kiri;
+                    background: crimson;
+                    color: white;
+                }
+                20%{
+                    top: $atas;
+                    left: $kanan;
+                    background: crimson;
+                    color: white;
+                }
+                30%,50%{
+                    top: $tengah;
+                    left: $kanan;
+                    background: black;
+                    color: white;
+                }
+                60%{
+                    top: $bawah;
+                    left: $kanan;
+                    background: crimson;
+                    color: white;
+                }
+                70%{
+                    top: $bawah;
+                    left: $kiri;
+                    background: crimson;
+                    color: white;
+                }
+                80%, 100%{
+                    top: $tengah;
+                    left: $kiri;
+                    background: black;
+                    color: white;
+                }
+            }
+            @keyframes move-b{
+                0%{
+                    top: $tengah;
+                    left: $kanan;
+                    background: black;
+                    color: white;
+                }
+                10%{
+                    top: $bawah;
+                    left: $kanan;
+                    background: crimson;
+                    color: white;
+                }
+                20%{
+                    top: $bawah;
+                    left: $kiri;
+                    background: crimson;
+                    color: white;
+                }
+                30%,50%{
+                    top: $tengah;
+                    left: $kiri;
+                    background: black;
+                    color: white;
+                }
+                60%{
+                    top: $atas;
+                    left: $kiri;
+                    background: crimson;
+                    color: white;
+                }
+                70%{
+                    top: $atas;
+                    left: $kanan;
+                    background: crimson;
+                    color: white;
+                }
+                80%, 100%{
+                    top: $tengah;
+                    left: $kanan;
+                    background: black;
+                    color: white;
+                }
+            }
+        }
+    }
+}
