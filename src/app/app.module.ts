@@ -3,32 +3,15 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
-import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { SvgAnimationPage } from '../pages/svg-animation/svg-animation';
-import { TextAnimationPage } from '../pages/text-animation/text-animation';
-import { LogoPage } from '../pages/logo/logo';
-import { TextGlowPage } from '../pages/text-glow/text-glow';
-import { DuitPacarPage } from '../pages/duit-pacar/duit-pacar';
-import { TextFlipPage } from '../pages/text-flip/text-flip';
-import { LoadingBarPage } from '../pages/loading-bar/loading-bar';
 import { AngularAnimationPage } from '../pages/angular-animation/angular-animation';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MyApp } from './app.component';
 
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    SvgAnimationPage,
-    TextAnimationPage,
-    LogoPage,
-    TextGlowPage,
-    DuitPacarPage,
-    TextFlipPage,
-    LoadingBarPage,
-    AngularAnimationPage
   ],
   imports: [
     BrowserModule,
@@ -38,15 +21,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    SvgAnimationPage,
-    TextAnimationPage,
-    LogoPage,
-    TextGlowPage,
-    DuitPacarPage,
-    TextFlipPage,
-    LoadingBarPage,
-    AngularAnimationPage
   ],
   providers: [
     StatusBar,

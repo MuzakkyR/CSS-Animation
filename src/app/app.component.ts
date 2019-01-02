@@ -17,7 +17,7 @@ import { AngularAnimationPage } from '../pages/angular-animation/angular-animati
   templateUrl: 'app.html'
 })
 export class MyApp {
-    rootPage:any = AngularAnimationPage;
+    rootPage:any = 'HomePage';
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
