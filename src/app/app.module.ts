@@ -11,6 +11,7 @@ import { TextAnimationPage } from '../pages/text-animation/text-animation';
 import { LogoPage } from '../pages/logo/logo';
 import { TextGlowPage } from '../pages/text-glow/text-glow';
 import { DuitPacarPage } from '../pages/duit-pacar/duit-pacar';
+import { TextFlipPage } from '../pages/text-flip/text-flip';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DuitPacarPage } from '../pages/duit-pacar/duit-pacar';
     TextAnimationPage,
     LogoPage,
     TextGlowPage,
-    DuitPacarPage
+    DuitPacarPage,
+    TextFlipPage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ import { DuitPacarPage } from '../pages/duit-pacar/duit-pacar';
     TextAnimationPage,
     LogoPage,
     TextGlowPage,
-    DuitPacarPage
+    DuitPacarPage,
+    TextFlipPage
   ],
   providers: [
     StatusBar,

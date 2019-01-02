@@ -1,0 +1,44 @@
+page-text-flip {
+
+    .wrapper{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        .container{
+            position: absolute;
+            animation-name: animasi;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            transform-style: preserve-3d;
+            animation-timing-function: ease;
+        }
+        .container:nth-child(1){
+            left: 0px;
+        }
+        .container:nth-child(2){
+            left: 50px;
+        }
+        h1{
+            font-size: 5em;
+            backface-visibility: hidden;
+            position: absolute;
+        }
+        h2{
+            font-size: 5em;
+            position: absolute;
+            backface-visibility: hidden;         
+            transform:rotateY(180deg);  
+        }
+        @keyframes animasi{
+            0%{
+                transform: rotateY(0deg);
+            }
+            100%{
+                transform: rotateY(180deg);
+            }
+        }
+    }
+
+}
