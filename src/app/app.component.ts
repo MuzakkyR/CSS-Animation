@@ -10,11 +10,13 @@ import { LogoPage } from '../pages/logo/logo';
 import { TextGlowPage } from '../pages/text-glow/text-glow';
 import { DuitPacarPage } from '../pages/duit-pacar/duit-pacar';
 import { TextFlipPage } from '../pages/text-flip/text-flip';
+import { LoadingBarPage } from '../pages/loading-bar/loading-bar';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-    rootPage:any = TextFlipPage;
+    rootPage:any = LoadingBarPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
