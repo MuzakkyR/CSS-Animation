@@ -13,6 +13,9 @@ import { TextGlowPage } from '../pages/text-glow/text-glow';
 import { DuitPacarPage } from '../pages/duit-pacar/duit-pacar';
 import { TextFlipPage } from '../pages/text-flip/text-flip';
 import { LoadingBarPage } from '../pages/loading-bar/loading-bar';
+import { AngularAnimationPage } from '../pages/angular-animation/angular-animation';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -24,10 +27,12 @@ import { LoadingBarPage } from '../pages/loading-bar/loading-bar';
     TextGlowPage,
     DuitPacarPage,
     TextFlipPage,
-    LoadingBarPage
+    LoadingBarPage,
+    AngularAnimationPage
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -40,7 +45,8 @@ import { LoadingBarPage } from '../pages/loading-bar/loading-bar';
     TextGlowPage,
     DuitPacarPage,
     TextFlipPage,
-    LoadingBarPage
+    LoadingBarPage,
+    AngularAnimationPage
   ],
   providers: [
     StatusBar,
