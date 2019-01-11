@@ -19,25 +19,39 @@ import {
   selector: 'page-angular-animation',
   templateUrl: 'angular-animation.html',
   animations:[
-    trigger('kananKiriOke',[
-      state('kanan', style({
-        transform: 'rotateY(-180deg)',
-        backfaceVisibility: 'hidden'     
+    trigger('byClick', [
+      state('bukaBox1', style({
+        top:'-150px',
+        left:'-70px',
+        opacity:'1',
       })),
-      state('kiri', style({
-        transform: 'rotateY(0deg)'                    
+      state('bukaBox2', style({
+        top:'-150px',
+        left:'0px',
+        opacity:'1',
+      })),      
+      state('bukaBox3', style({
+        top:'-150px',
+        left:'70px',
+        opacity:'1',
       })),
-      transition('kanan <=> kiri', [
-        animate('2s') 
+      state('tutupBox', style({
+        top:'0',
+        left:'0',
+        opacity:'0',        
+      })),
+      transition('* <=> tutupBox',[
+        animate('1s')
       ])
     ])
   ]
 })
 export class AngularAnimationPage {
 
-  infiniteToggle=false;
+  isByClick : boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.isByClick = false;
   }
 
   ionViewDidLoad() {
@@ -45,7 +59,7 @@ export class AngularAnimationPage {
   }
 
   toggle(){
-    this.infiniteToggle = !this.infiniteToggle;
+    this.isByClick = !this.isByClick;
   }
 
 }

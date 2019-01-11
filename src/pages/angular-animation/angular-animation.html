@@ -8,12 +8,19 @@
 <ion-content padding>
 
   <div class="wrapper">
-    <div class="box-1" (click)="toggle()">
-      <h1 [@kananKiriOke]="infiniteToggle ? 'kanan' : 'kiri'">Hello</h1>
-    </div>
-    <div class="box-2">
-      <h1>World</h1>
-    </div>
-  </div>
 
+    <div class="container">
+      <div class="box b1" [@byClick]="isByClick ? 'bukaBox1' : 'tutupBox'">
+        I
+      </div>
+      <div class="box b2" [@byClick]="isByClick ? 'bukaBox2' : 'tutupBox'">
+        O
+      </div>
+      <div class="box b3" [@byClick]="isByClick ? 'bukaBox3' : 'tutupBox'">
+        U
+      </div>
+      <button ion-buttons (click)="toggle()" padding>Click Me</button>
+    </div>
+
+  </div>
 </ion-content>
