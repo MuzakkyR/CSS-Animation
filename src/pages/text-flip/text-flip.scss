@@ -1,49 +1,53 @@
 page-text-flip {
 
-    .wrapper{
+.wrapper{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 100px;
+
+    .container{
+        position: relative;
+        transform-style: preserve-3d;
+        animation-name: animasi;
+        animation-duration: 2s;
+        animation-timing-function: ease;
+        animation-iteration-count: infinite;
+    }
+    h1{
+        font-size: 8em;
+        width: 100%;
+        height:100%;
         position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 500px;
-        height: 90px;
-        .container{
-            position: relative;
-            animation-name: animasi;
-            animation-duration: 2s;
-            animation-iteration-count: infinite;
-            transform-style: preserve-3d;
-            h1{
-                position: absolute;
-                top: 0%;
-                left: 0%;
-                margin:0;
-                text-align: center;
-                width: 100%;
-                height: 100%;
-                font-size: 5em;
-                backface-visibility: hidden;
-            }
-            .belakang{
-                transform: rotateY(180deg);
-            }
-        }
+        top:0;
+        left:0;
+        text-align: center;
+        margin:0;
+        backface-visibility: hidden;
     }
-    @keyframes animasi{
-        0%{
-            transform: rotateY(0deg)
-        }
-        25%{
-            transform: rotateY(90deg);
-        }
-        50%{
-            transform: rotateY(180deg);            
-        }
-        75%{
-            transform: rotateY(270deg);
-        }
-        100%{
-            transform: rotateY(360deg);
-        }
+    .belakang{
+        transform: rotateY(180deg);
     }
+}
+
+
+@keyframes animasi{
+    0%{
+        transform: rotateY(0deg);
+    }
+    25%{
+        transform: rotateY(90deg);
+    }
+    50%{
+        transform: rotateY(180deg);
+    }
+    75%{
+        transform: rotateY(270deg);
+    }
+    100%{
+        transform: rotateY(360deg);
+    }
+}
 }

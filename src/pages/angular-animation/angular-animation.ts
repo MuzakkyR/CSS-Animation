@@ -5,7 +5,8 @@ import {
   state,
   style,
   animate,
-  transition, } from '@angular/animations';
+  transition,
+  keyframes } from '@angular/animations';
 
 /**
  * Generated class for the AngularAnimationPage page.
@@ -23,7 +24,7 @@ import {
       state('bukaBox1', style({
         top:'-150px',
         left:'-70px',
-        opacity:'1',
+        opacity:'1'
       })),
       state('bukaBox2', style({
         top:'-150px',
