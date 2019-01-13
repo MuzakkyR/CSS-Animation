@@ -15,30 +15,44 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DashboardPage {
 
-  textPage:any = [];
+  linkPage:any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
-    this.textPage = [
+    this.linkPage = [
       {
-        name:"Transparant Background",
-        link:"HomePage"
+        title:"Text Animation",
+        content:[
+          {
+            name:"Transparant Background",
+            link:"HomePage"
+          },
+          {
+            name:"Switch Side Text",
+            link:"DuitPacarPage"
+          },
+          {
+            name:"Wavy Background",
+            link:"TextAnimationPage"
+          },
+          {
+            name:"Flip Text",
+            link:"TextFlipPage"
+          },
+          {
+            name:"Glowing Text",
+            link:"TextGlowPage"
+          }
+        ]
       },
       {
-        name:"Switch Side Text",
-        link:"DuitPacarPage"
-      },
-      {
-        name:"Wavy Background",
-        link:"TextAnimationPage"
-      },
-      {
-        name:"Flip Text",
-        link:"TextFlipPage"
-      },
-      {
-        name:"Glowing Text",
-        link:"TextGlowPage"
+        title:"Component",
+        content:[
+          {
+            name:"Loading Bars",
+            link:"LoadingBarPage"
+          }
+        ]
       }
     ]
   }

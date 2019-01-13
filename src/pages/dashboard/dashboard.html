@@ -9,10 +9,12 @@
 
 <ion-content padding>
 
-  <div class="container">
-    <h1>Text Animation</h1>
-    <div class="btn-box">
-      <button ion-button *ngFor="let text of textPage" (click)="toLink(text.link)">{{ text.name }}</button>
+  <div class="container" fxLayout="column">
+    <div class="wrapper" *ngFor="let item of linkPage" margin-bottom>
+      <h1>{{ item.title }}</h1>
+      <div class="btn-box">
+        <button ion-button small outline *ngFor="let text of item.content" (click)="toLink(text.link)">{{ text.name }}</button>
+      </div>
     </div>
   </div>
 
