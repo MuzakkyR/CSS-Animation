@@ -1,0 +1,19 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>CSS Animation Collection</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <div class="container">
+    <h1>Text Animation</h1>
+    <div class="btn-box">
+      <button ion-button *ngFor="let text of textPage" (click)="toLink(text.link)">{{ text.name }}</button>
+    </div>
+  </div>
+
+</ion-content>
