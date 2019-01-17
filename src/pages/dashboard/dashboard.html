@@ -10,10 +10,10 @@
 <ion-content padding>
 
   <div class="container" fxLayout="column">
-    <div class="wrapper" *ngFor="let item of linkPage" margin-bottom>
+    <div class="wrapper" *ngFor="let item of linkPage" margin-bottom padding>
       <h1>{{ item.title }}</h1>
       <div class="btn-box">
-        <button ion-button small outline *ngFor="let text of item.content" (click)="toLink(text.link)">{{ text.name }}</button>
+        <button ion-button small round outline *ngFor="let text of item.content" (click)="toLink(text.link)">{{ text.name }}</button>
       </div>
     </div>
   </div>

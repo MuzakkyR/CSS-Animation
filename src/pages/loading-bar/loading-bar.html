@@ -8,11 +8,7 @@
 
   <div class="wrapper">
     <ul>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>      
+      <li *ngFor="let bar of [1,2,3,4,5]; index as i" [ngStyle]="{'animation-delay.s':(i+1)/10}"></li>      
     </ul>
   </div>
 

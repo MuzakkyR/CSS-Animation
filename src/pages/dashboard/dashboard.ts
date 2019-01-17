@@ -42,6 +42,10 @@ export class DashboardPage {
           {
             name:"Glowing Text",
             link:"TextGlowPage"
+          },
+          {
+            name:"Typewriter Effect",
+            link:"TypewriterPage"
           }
         ]
       },
@@ -51,7 +55,7 @@ export class DashboardPage {
           {
             name:"Loading Bars",
             link:"LoadingBarPage"
-          }
+          },
         ]
       }
     ]

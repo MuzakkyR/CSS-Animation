@@ -1,0 +1,36 @@
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
+
+/**
+ * Generated class for the TrainingPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+
+@IonicPage()
+@Component({
+  selector: "page-training",
+  templateUrl: "training.html"
+})
+export class TrainingPage {
+  daftarKlub:any = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    // this.daftarKlub = [{
+    //   nama: "klub",
+    //   komentar: "ini komentar"
+    // }, {}, {}];
+  }
+
+  ionViewDidLoad() {
+    console.log("ionViewDidLoad TrainingPage");
+  }
+
+  tampil(klub:any, komentar:any) {
+    let hasil = {"nama":klub, "komentar":komentar};
+
+    this.daftarKlub.push(hasil);
+    console.log(this.daftarKlub);
+  }
+}
