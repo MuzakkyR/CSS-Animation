@@ -1,5 +1,7 @@
 {
   "name": "bg-highlight-text-css-animation",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }

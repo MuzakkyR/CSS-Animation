@@ -1,0 +1,45 @@
+page-subscribe-btn {
+    .container, .btn{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .container{
+        width: 500px;
+        height: 400px;
+        background: darkorange;
+
+        .btn{
+            background: white;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding:10px;
+            width: 200px;
+            height: 50px;
+
+            ion-label{
+                margin:0;
+                text-align: center;
+            }
+
+            .input{
+                display: flex;
+                justify-content: space-between;
+            }
+
+            button{
+                background: darkorange;
+                padding:5px 10px;
+
+                ion-label{
+                    color: white !important;
+                }
+
+            }
+        }
+    }
+}

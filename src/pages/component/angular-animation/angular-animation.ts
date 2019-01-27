@@ -42,7 +42,7 @@ import {
         opacity:'0',        
       })),
       transition('* <=> tutupBox',[
-        animate('200ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+        animate('200ms cubic-bezier(1, 0, 0, 1)')
       ])
     ])
   ]

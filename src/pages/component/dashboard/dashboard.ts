@@ -56,6 +56,10 @@ export class DashboardPage {
             name:"Loading Bars",
             link:"LoadingBarPage"
           },
+          {
+            name:"Subscriber Button",
+            link:"SubscribeBtnPage"
+          }
         ]
       }
     ]
