@@ -17,15 +17,19 @@
 
   <div class="container">
 
-    <div (click)="toInput()" class="btn">
-      <ion-label *ngIf="!nilai">Notify Me</ion-label>
-      <div class="input" *ngIf="nilai && !thank">
+    <div (click)="toInput()" class="btn" [@fadingHorizontal]>
+
+      <ion-label [@fadingHorizontal] *ngIf="!nilai">Notify Me</ion-label>
+      
+      <div class="input" [@fadingVertical] *ngIf="nilai && !thank">
         <ion-input  placeholder="Email"></ion-input>
-        <button (click)="toThank()" round ion-button>
+        <button (click)="toThank()" clean ion-button>
           <ion-label>Send</ion-label>
         </button>
       </div>
-      <ion-label *ngIf="thank">Thank You</ion-label>
+      
+      <ion-label [@fadingHorizontal] *ngIf="thank">Thank You</ion-label>
+    
     </div>
 
   </div>
