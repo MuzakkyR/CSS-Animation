@@ -17,18 +17,16 @@
 
   <div class="container">
 
-    <div (click)="toInput()" class="btn" [@fadingHorizontal]>
+    <div (click)="toInput()" class="btn">
 
-      <ion-label [@fadingHorizontal] *ngIf="!nilai">Notify Me</ion-label>
+      <ion-label class="label" [@fadingNotify] *ngIf="!nilai">Subscribe Now</ion-label>
       
-      <div class="input" [@fadingVertical] *ngIf="nilai && !thank">
-        <ion-input  placeholder="Email"></ion-input>
-        <button (click)="toThank()" clean ion-button>
-          <ion-label>Send</ion-label>
-        </button>
+      <div class="input" [@fadingInput] *ngIf="nilai && !thank">
+        <ion-input [(ngModel)]="inputan" placeholder="E-mail"></ion-input>
+        <button (click)="toThank()" [disabled]="inputan == '' || inputan == null" clean round ion-button>Send</button>
       </div>
       
-      <ion-label [@fadingHorizontal] *ngIf="thank">Thank You</ion-label>
+      <ion-label class="label" [@fadingThank] *ngIf="thank">Thank You!</ion-label>
     
     </div>
 

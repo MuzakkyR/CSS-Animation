@@ -19,13 +19,29 @@ import {
   selector: 'page-subscribe-btn',
   templateUrl: 'subscribe-btn.html',
   animations:[
-    trigger('fadingHorizontal', [
+    trigger('fadingNotify', [
       transition('void => *',[
         style({
           opacity:0,
-          width:0,
         }),
-        animate('500ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+        animate('400ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ]),
+      transition('* => void',[
+        animate('300ms cubic-bezier(0.4, 0.0, 0.2, 1)'),
+        style({ 
+          opacity:0,
+          width:0
+        }),
+      ]),
+    ]),
+
+    trigger('fadingInput', [
+      transition('void => *', [
+        style({
+          opacity: 0,
+          width:0
+        }),
+        animate('300ms 280ms cubic-bezier(0.4, 0.0, 0.2, 1)')
       ]),
       transition('* => void',[
         animate('400ms cubic-bezier(0.4, 0.0, 0.2, 1)'),
@@ -36,28 +52,29 @@ import {
       ]),
     ]),
 
-    trigger('fadingVertical', [
+    trigger('fadingThank', [
       transition('void => *', [
         style({
           opacity: 0,
-          height: 0
+          width:0
         }),
-        animate('400ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+        animate('200ms 300ms cubic-bezier(0.4, 0.0, 0.2, 1)')
       ]),
-      transition('* => void', [
-        animate('300ms cubic-bezier(0.4, 0.0, 0.2, 1)'),
-        style({
-          opacity: 0,
-          height: 0
-        })
-      ])
-    ])
+      transition('* => void',[
+        animate('400ms cubic-bezier(0.4, 0.0, 0.2, 1)'),
+        style({ 
+          opacity:0,
+          width:0
+        }),
+      ]),
+    ]),
   ]
 })
 export class SubscribeBtnPage {
 
   nilai:boolean;  
   thank:boolean;
+  inputan:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
