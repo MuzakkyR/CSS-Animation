@@ -67,7 +67,7 @@ export class AnimationPage1Page {
     this.toggleAnimate = true;
     this.card = document.getElementById("card");
     this.shape = this.card.getBoundingClientRect();
-    console.log(this.shape);
+    console.log(this.shape, "lala");
     this.navCtrl.push("AnimationPage2Page", {elemen: this.card.outerHTML, 
                                             width:this.shape.width, 
                                             height:this.shape.height, 

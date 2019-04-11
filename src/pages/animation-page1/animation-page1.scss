@@ -8,13 +8,12 @@ page-animation-page1 {
     }
 
     .card{
-        width: 150px;
-        cursor: pointer;
-
         position: absolute;
         top: 50%;
         left:50%;
         transform: translate(-50%, -50%);
+        height: 300px;
+        cursor: pointer;
 
         display: flex;
         flex-direction: column;
@@ -23,6 +22,10 @@ page-animation-page1 {
         p{
             font-size: 16px !important; 
             text-align: center;
+        }
+        img{
+            width: 200px;
+            height: 150px;
         }
     }
 

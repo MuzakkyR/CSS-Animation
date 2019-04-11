@@ -44,7 +44,6 @@ export class AnimationPage2Page {
   heightShape:any;  
   topShape:any;
   leftShape:any;
-  toggleAnimate:any = false; 
   getParent:any; 
 
   constructor(
@@ -65,22 +64,9 @@ export class AnimationPage2Page {
     this.topShape = this.navParams.get("top");    
     this.leftShape = this.navParams.get("left");    
     
-    this.toggleAnimate = true;      
-    console.log(this.widthShape);
     this.render.setStyle(this.getParent, "width", this.widthShape + "px");
     this.render.setStyle(this.getParent, "height", this.heightShape + "px");
     this.render.setStyle(this.getParent, "top", this.topShape + "px");
     this.render.setStyle(this.getParent, "left", this.leftShape + "px");
-    
-    
-    
-    // this.getParent = document.getElementsByTagName("page-animation-page2");
-    // console.log(this.getParent.outerHTML, " awa awa");
-  }
-
-
-  togel(){
-    this.toggleAnimate = !this.toggleAnimate;
-    console.log(this.toggleAnimate)
   }
 }
