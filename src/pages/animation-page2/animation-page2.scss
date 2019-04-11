@@ -1,0 +1,57 @@
+page-animation-page2 {
+
+    @keyframes gede{
+        0%{
+           transform:translate(-50%, -50%) scale(1, 1);
+        }
+        20%{
+            top:40%;
+            left:50%;
+            transform:translate(-50%, -40%) scale(1, 1.5);            
+        }
+        50%{
+            top:20%;
+            left:50%;
+            transform:translate(-50%, -20%) scale(1.5, 1.5);
+        }
+
+        100%{
+            top:20%;
+            left:10%;
+            transform:translate(-10%, -20%) scale(1.5, 1.5);
+        }
+    }
+    
+    .container{
+        background:#eee;
+        padding:16px;
+        height: 500px;
+        border:1px solid black;
+        position: relative;
+    }
+
+    .card{
+        border-radius:4px;
+        border:1px solid #ccc;
+        cursor: pointer;
+
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 150px;
+        display: flex;
+        flex-direction: column;
+
+        animation-name:gede;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease;
+
+        p{
+            font-size: 16px !important; 
+            text-align: center;
+        }
+    }
+
+}

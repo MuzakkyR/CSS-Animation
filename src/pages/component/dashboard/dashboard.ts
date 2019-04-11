@@ -61,6 +61,24 @@ export class DashboardPage {
             link:"SubscribeBtnPage"
           }
         ]
+      },
+      {
+        title:"SVG Animation",
+        content:[
+          {
+            name:"Arrow",
+            link:"SvgAnimationPage"
+          },
+        ]
+      },
+      {
+        title:"Page Transition",
+        content:[
+          {
+            name:"Page 1",
+            link:"AnimationPage1Page"
+          }
+        ]
       }
     ]
   }
