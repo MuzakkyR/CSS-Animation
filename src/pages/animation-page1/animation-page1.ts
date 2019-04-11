@@ -50,6 +50,7 @@ export class AnimationPage1Page {
 
   card:any;
   toggleAnimate:any;
+  shape:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.toggleAnimate = false;
@@ -64,7 +65,13 @@ export class AnimationPage1Page {
 
   toPage2(){
     this.toggleAnimate = true;
-    this.card = document.getElementById("card").outerHTML;
-    this.navCtrl.push("AnimationPage2Page", {elemen: this.card}, {animate:false})
+    this.card = document.getElementById("card");
+    this.shape = this.card.getBoundingClientRect();
+    console.log(this.shape);
+    this.navCtrl.push("AnimationPage2Page", {elemen: this.card.outerHTML, 
+                                            width:this.shape.width, 
+                                            height:this.shape.height, 
+                                            top:this.shape.top, 
+                                            left:this.shape.left }, {animate:false})
   }
 }

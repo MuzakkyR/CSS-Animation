@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {
   trigger,
@@ -40,17 +40,42 @@ import {
 export class AnimationPage2Page {
 
   firstParam:string;
-  toggleAnimate:any = false;  
+  widthShape:any;
+  heightShape:any;  
+  topShape:any;
+  leftShape:any;
+  toggleAnimate:any = false; 
+  getParent:any; 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    // this.ampas = "<div class='tul'>Mantab</div>"
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public elref:ElementRef,
+  public render:Renderer2) {
+
+      this.getParent = this.elref.nativeElement;
+      console.log(this.getParent);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AnimationPage2Page');
     this.firstParam = this.navParams.get("elemen");
-    console.log(this.firstParam, "yayaya")
-    this.toggleAnimate = true;               
+    this.widthShape = this.navParams.get("width");
+    this.heightShape = this.navParams.get("height");
+    this.topShape = this.navParams.get("top");    
+    this.leftShape = this.navParams.get("left");    
+    
+    this.toggleAnimate = true;      
+    console.log(this.widthShape);
+    this.render.setStyle(this.getParent, "width", this.widthShape + "px");
+    this.render.setStyle(this.getParent, "height", this.heightShape + "px");
+    this.render.setStyle(this.getParent, "top", this.topShape + "px");
+    this.render.setStyle(this.getParent, "left", this.leftShape + "px");
+    
+    
+    
+    // this.getParent = document.getElementsByTagName("page-animation-page2");
+    // console.log(this.getParent.outerHTML, " awa awa");
   }
 
 
