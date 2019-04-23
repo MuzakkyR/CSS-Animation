@@ -59,6 +59,10 @@ export class DashboardPage {
           {
             name:"Subscriber Button",
             link:"SubscribeBtnPage"
+          },
+          {
+            name:"Pinch Zoom",
+            link:"PinchzoomPage"
           }
         ]
       },

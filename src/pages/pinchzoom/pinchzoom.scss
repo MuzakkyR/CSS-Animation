@@ -1,0 +1,21 @@
+page-pinchzoom {
+
+    .gambar1{
+        margin-bottom: 50px;
+        img{
+            touch-action: pinch-zoom;
+        }
+    }
+    .gambar1, .gambar2{
+        width: 100%;
+        img{
+            max-width: 100%;
+        }
+    }
+    .gambar2{
+        img{
+            touch-action: double-tap-zoom;
+        }
+    }
+
+}
