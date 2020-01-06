@@ -1,0 +1,179 @@
+gd-calendar {
+  .calendar-container{
+    max-width: 320px;
+    border-radius: 3px;
+    .range-box{
+      background-color:#FBAC5E;
+      padding: 16px;
+      .title-box{
+        margin-bottom: 12px;
+        ion-label{
+          color: rgba(#ffffff, .7) !important;
+          font-size: 11px;
+        }
+        ion-label:nth-child(2){
+          text-align: end;
+        }
+      }
+      .data-box{
+        margin-bottom: 10px;
+        .date-range{
+          .date-number{
+            color: white;
+            font-size: 38px;
+          }
+          .detail-box{
+            .month-year{
+              color: white;
+              margin-bottom: 2px;
+            }
+            .date-day{
+              font-size: 12px;
+              color: rgba(#ffffff, .7);
+            }
+          }
+        }
+        ion-icon{
+          font-size: 50px;
+          color: white;
+          margin: 0 10px;
+        }
+      }
+      .time-box{
+        .time-section{
+          border-radius: 200px;
+          width: 68px;
+          height: 29px;
+          background-color:rgba(#ffffff, .25);          
+          ion-label{
+            color: white !important; 
+            text-align: center;
+          }
+        }
+      }
+    }
+    .GdCalendar_header{
+      width: 100%;
+      color: black;
+      font-size: 16px;
+      padding: 8px;
+      margin-bottom: 8px;
+      border-radius: 4px;
+      ion-icon{
+        cursor: pointer;
+      }
+    }
+    .GdCalendar_month{
+      width: 100%;
+      .GdCalendar-headbox{
+        margin: 5px 0;
+        height: 38px;
+        .GdCalendar_head{
+          flex: 0 0 calc((100% - 70px) / 7);
+          margin: 0 5px;
+          text-align: center;
+          color: rgba(#000000, .54);
+        }
+      }
+      .GdCalendar_date{
+          height: 270px;
+          overflow:auto;
+          position: relative;
+          margin-bottom: 24px;
+        .GdCalendar_week{
+          margin: 16px 0;
+          border-radius: 200px;
+          overflow-y: visible;
+          overflow-x: hidden;
+          height: 43px;
+          width: 100%;
+          .GdCalendar_day{
+            flex: 0 0 calc(100% / 7);
+            position: relative;
+            .wrapper{
+              width: 100%;
+              height: 32px;
+              border: 2px solid transparent;
+              ion-label{
+                font-size: 12px;
+                text-align: center;
+                z-index: 2;
+              }
+            }
+            .wrapper:hover{
+              cursor: pointer;
+            }
+            .startDate{
+              &:before{
+                content:"";
+                position: absolute;
+                width: 39px;
+                height: 39px;
+                background-color:#D5ECFB;
+                border-radius: 200px;
+                border: 2px solid #63BEFB;
+                transition: all 400ms ease;
+                z-index: 1;
+              }       
+            }
+            .endDate{
+              ion-label{
+                color: white !important;  
+              }
+              &:before {
+                content: "";
+                position: absolute;
+                width: 39px;
+                height: 39px;
+                border: 2px solid transparent;                
+                border-radius: 200px;
+                transition: all 400ms ease;
+                background-color:#63BEFB;
+                z-index: 1;
+              }
+            }
+            .sameDay{
+              transition: all 400ms ease;            
+              background:radial-gradient(circle, #D5ECFB 0%, #63BEFB 100%);
+              border-color: #63BEFB;
+              ion-label{
+                color: #000 !important;
+              }
+            }
+          }
+          .startWrapper{
+            background-color:#D5ECFB;
+            border-radius: 200px 0 0 200px;
+          }
+          .endWrapper{
+            background-color:#D5ECFB;            
+            border-radius: 0 200px 200px 0;            
+          }
+          .betweenWrapper{
+            transition: all 400ms ease;
+            background-color:#D5ECFB;
+          }
+        }
+      }
+      .GdCalendar_date::-webkit-scrollbar{
+        // display: none;
+      }
+      .confirm-box{
+        button{
+          border-radius: 10px;
+          width: 134px;
+          height: 41px;
+          box-shadow: unset;
+          &:nth-child(1){
+            color: #A5B0B7;
+            border-color: #D8E4EB;
+          }
+          &:nth-child(2){
+            background-color: #FBAC5E;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}

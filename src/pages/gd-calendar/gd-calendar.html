@@ -1,0 +1,65 @@
+<div class="calendar-container" fxLayout="column">
+  <div class="range-box">
+    <div class="title-box" fxLayout="row" fxLayoutAlign="space-between center">
+      <ion-label no-margin>Start Date</ion-label>
+      <ion-label no-margin>End Date</ion-label>
+    </div>
+    <div class="data-box" fxLayout="row" fxLayoutAlign="space-between center">
+      <div *ngIf="startDay" class="date-range" fxLayout="row" fxLayoutAlign="start center">
+        <ion-label class="date-number" no-margin>{{startDayNumber}}</ion-label>
+        <div class="detail-box">
+          <ion-label class="month-year" no-margin>{{startMonth}} {{startYear}}</ion-label>
+          <ion-label class="date-day" no-margin>{{startDay}}</ion-label>
+        </div>
+      </div>
+      <ion-icon *ngIf="endDay" fxFlex="none" name="ios-arrow-round-forward-outline"></ion-icon>
+      <div *ngIf="endDay" class="date-range" fxLayout="row" fxLayoutAlign="start center">
+        <ion-label class="date-number" no-margin>{{endDayNumber}}</ion-label>
+        <div class="detail-box">
+          <ion-label class="month-year" no-margin>{{endMonth}} {{endYear}}</ion-label>
+          <ion-label class="date-day" no-margin>{{endDay}}</ion-label>
+        </div>
+      </div>
+    </div>
+    <div class="time-box" fxLayoutAlign="space-between center">
+      <div class="time-section" fxLayout="row" fxLayoutAlign="center center">
+        <ion-label no-margin>08:00</ion-label>
+      </div>
+      <div class="time-section" fxLayout="row" fxLayoutAlign="center center">
+        <ion-label no-margin>08:00</ion-label>
+      </div>
+    </div>
+  </div>
+  <div class="GdCalendar_header" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+    <ion-label fxFlex="">{{activeMonthLabel}} {{activeYearLabel}}</ion-label>
+    <ion-icon fxFlex="none" (click)="toPrevMonth()" name="ios-arrow-up-outline"></ion-icon>
+    <ion-icon fxFlex="none" (click)="toNextMonth()" name="ios-arrow-down-outline"></ion-icon>
+  </div>
+  <div class="GdCalendar_month">
+    <div class="GdCalendar-headbox" fxLayout="row">
+      <div class="GdCalendar_head" *ngFor="let item of dayList" fxLayout="row" fxLayoutAlign="center center">
+        {{item}}
+      </div>
+    </div>
+    <div class="GdCalendar_date" #scrollView (scroll)="onScroll()">
+      <div class="GdCalendar_week" fxLayout="row" *ngFor="let weeks of weekArray; index as i">
+        <div class="GdCalendar_day" fxLayout="row" fxLayoutAlign="center center" id="{{days.day}}{{days.month}}{{days.year}}" 
+        (click)="selectDate(days)" *ngFor="let days of weeks">
+          <div fxLayout="row" fxLayoutAlign="center center" class="wrapper" 
+          [ngClass]="{ 'startDate':days.start,
+                        'endDate':days.end,
+                        'startWrapper':days.start && startDay && endDay,
+                        'endWrapper':days.end && endDay,
+                        'betweenWrapper': days.between,
+                        'sameDay': days.start && days.end}">
+            <ion-label [ngStyle]="{'color':days.month == activeMonthLabel ? 'black' : '#bbb'}" no-margin>{{days.day}}</ion-label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="confirm-box" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
+      <button ion-button outline>Cancel</button>
+      <button ion-button>ok</button>
+    </div>
+  </div>
+</div>
