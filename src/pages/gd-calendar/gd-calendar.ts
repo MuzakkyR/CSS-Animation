@@ -55,6 +55,9 @@ export class GdCalendarPage {
   endMonth: any;
   endYear: any;
 
+  today: boolean = false;
+  todayDate: any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams
@@ -64,18 +67,27 @@ export class GdCalendarPage {
     }
   }
 
+  checkDateEvents(current){
+    current.format("DDMMMMYYYY") == this.todayDate ? this.today = true : this.today = false;
+    current.format("DDMMMMYYYY") == moment(this.startDate).format("DDMMMMYYYY") && this.startDate ? this.startSelected = true : this.startSelected = false;
+    current.format("DDMMMMYYYY") == moment(this.endDate).format("DDMMMMYYYY") && this.endDate ? this.endSelected = true : this.endSelected = false;
+    current.isBetween(this.startDate, this.endDate) ? this.betweenSelected = true : this.betweenSelected = false;
+  }
+
   getDaysArrayByMonth(date) { // mendapatkan array tanggal pada suatu bulan
     let totalDaysInMonth = moment(date).daysInMonth();
     let arrDays = [];
     while (totalDaysInMonth) {
       let current = moment(date).date(totalDaysInMonth);
+      this.checkDateEvents(current);
       arrDays.unshift({
         day: current.format("DD"),
         month: current.format("MMMM"),
         year: current.format("YYYY"),
         start: this.startSelected,
         end: this.endSelected,
-        between: this.betweenSelected
+        between: this.betweenSelected,
+        today: this.today
       });
       totalDaysInMonth--;
     }
@@ -110,7 +122,8 @@ export class GdCalendarPage {
         year: moment(firstDayOfTheMonth).weekday(index).format("YYYY"),
         start: this.startSelected,
         end: this.endSelected,
-        between: this.betweenSelected
+        between: this.betweenSelected,
+        today: this.today
       })
     }
   }
@@ -125,13 +138,17 @@ export class GdCalendarPage {
         year: moment(lastDayOfTheMonth).weekday(index).format("YYYY"),
         start: this.startSelected,
         end: this.endSelected,
-        between: this.betweenSelected
+        between: this.betweenSelected,
+        today: this.today
       })
     }
   }
 
   joinAllMonthsArray() { // concat semua array
     this.currentLoadedMonth = this.firstWeek.concat(this.previousMonth.concat(this.currentMonth.concat(this.nextMonth.concat(this.lastWeek))))
+    this.currentLoadedMonth.forEach(element => {
+
+    });
   }
 
   sliceMonthsArrayToWeeksArray() { // potong array jadi per minggu
@@ -153,6 +170,7 @@ export class GdCalendarPage {
     this.activeMonthId = "01" + this.currentActiveMonth.format("MMMM") + this.currentActiveMonth.format("YYYY");
     this.prevMonthId = "01" + this.prevActiveMonth.format("MMMM") + this.prevActiveMonth.format("YYYY");
     this.nextMonthId = "01" + this.nextActiveMonth.format("MMMM") + this.nextActiveMonth.format("YYYY");
+    this.todayDate = moment().format("DDMMMMYYYY");
   }
 
   resetWeek() {
@@ -203,7 +221,7 @@ export class GdCalendarPage {
       this.elementParent.scrollTop = this.checkMonthPosition(this.prevMonthId);
     } else if (this.elementParent.scrollTop - this.checkMonthPosition(this.activeMonthId) < this.elementParent.clientHeight / -4) {
       this.currentActiveMonth = this.prevActiveMonth; //scroll atas
-      this.getAllCalendarData('update', 'prevMonth');      
+      this.getAllCalendarData('update', 'prevMonth');
       this.elementParent.scrollTop = this.checkMonthPosition(this.nextMonthId);
     }
   }

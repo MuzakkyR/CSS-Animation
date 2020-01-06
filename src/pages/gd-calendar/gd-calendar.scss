@@ -109,8 +109,8 @@ gd-calendar {
                 position: absolute;
                 width: 39px;
                 height: 39px;
-                background-color:#D5ECFB;
                 border-radius: 200px;
+                background-color:#D5ECFB;
                 border: 2px solid #63BEFB;
                 transition: all 400ms ease;
                 z-index: 1;
@@ -140,6 +140,18 @@ gd-calendar {
                 color: #000 !important;
               }
             }
+            .today{
+              &:before {
+                content: "";
+                position: absolute;
+                width: 39px;
+                height: 39px;
+                border: 2px solid #D5ECFB;                
+                border-radius: 200px;
+                transition: all 400ms ease;
+                z-index: 1;
+              }
+            }
           }
           .startWrapper{
             background-color:#D5ECFB;
@@ -156,7 +168,7 @@ gd-calendar {
         }
       }
       .GdCalendar_date::-webkit-scrollbar{
-        // display: none;
+        display: none;
       }
       .confirm-box{
         button{

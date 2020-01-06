@@ -51,7 +51,8 @@
                         'startWrapper':days.start && startDay && endDay,
                         'endWrapper':days.end && endDay,
                         'betweenWrapper': days.between,
-                        'sameDay': days.start && days.end}">
+                        'sameDay': days.start && days.end,
+                        'today': days.today}">
             <ion-label [ngStyle]="{'color':days.month == activeMonthLabel ? 'black' : '#bbb'}" no-margin>{{days.day}}</ion-label>
           </div>
         </div>
