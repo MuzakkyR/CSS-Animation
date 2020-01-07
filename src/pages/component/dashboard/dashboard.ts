@@ -16,6 +16,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class DashboardPage {
 
   linkPage:any = [];
+  startDate:any = 'belum dipilih';
+  endDate:any = 'belum dipilih';
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
@@ -85,6 +87,11 @@ export class DashboardPage {
         ]
       }
     ]
+  }
+
+  getDate(event){
+    console.log("jalan")
+    this.startDate = event;
   }
 
   ionViewDidLoad() {

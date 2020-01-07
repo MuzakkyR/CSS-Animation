@@ -81,7 +81,7 @@ gd-calendar {
           position: relative;
           margin-bottom: 24px;
         .GdCalendar_week{
-          margin: 16px 0;
+          margin: 5px 0;
           border-radius: 200px;
           overflow-y: visible;
           overflow-x: hidden;
@@ -102,6 +102,12 @@ gd-calendar {
             }
             .wrapper:hover{
               cursor: pointer;
+            }
+            .active-month{
+              color:black !important;
+            }
+            .inactive-month{
+              color: rgba(#000000, .2) !important;
             }
             .startDate{
               &:before{

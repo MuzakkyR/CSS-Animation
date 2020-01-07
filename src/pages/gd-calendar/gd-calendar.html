@@ -12,8 +12,8 @@
           <ion-label class="date-day" no-margin>{{startDay}}</ion-label>
         </div>
       </div>
-      <ion-icon *ngIf="endDay" fxFlex="none" name="ios-arrow-round-forward-outline"></ion-icon>
-      <div *ngIf="endDay" class="date-range" fxLayout="row" fxLayoutAlign="start center">
+      <ion-icon *ngIf="endDate" fxFlex="none" name="ios-arrow-round-forward-outline"></ion-icon>
+      <div *ngIf="endDate" class="date-range" fxLayout="row" fxLayoutAlign="start center">
         <ion-label class="date-number" no-margin>{{endDayNumber}}</ion-label>
         <div class="detail-box">
           <ion-label class="month-year" no-margin>{{endMonth}} {{endYear}}</ion-label>
@@ -32,8 +32,8 @@
   </div>
   <div class="GdCalendar_header" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
     <ion-label fxFlex="">{{activeMonthLabel}} {{activeYearLabel}}</ion-label>
-    <ion-icon fxFlex="none" (click)="toPrevMonth()" name="ios-arrow-up-outline"></ion-icon>
-    <ion-icon fxFlex="none" (click)="toNextMonth()" name="ios-arrow-down-outline"></ion-icon>
+    <ion-icon fxFlex="none" (click)="toMonth('prev')" name="ios-arrow-up-outline"></ion-icon>
+    <ion-icon fxFlex="none" (click)="toMonth('next')" name="ios-arrow-down-outline"></ion-icon>
   </div>
   <div class="GdCalendar_month">
     <div class="GdCalendar-headbox" fxLayout="row">
@@ -48,12 +48,12 @@
           <div fxLayout="row" fxLayoutAlign="center center" class="wrapper" 
           [ngClass]="{ 'startDate':days.start,
                         'endDate':days.end,
-                        'startWrapper':days.start && startDay && endDay,
-                        'endWrapper':days.end && endDay,
+                        'startWrapper':days.start && !days.end && startDay && endDate,
+                        'endWrapper':days.end && endDate && !days.end,
                         'betweenWrapper': days.between,
-                        'sameDay': days.start && days.end,
                         'today': days.today}">
-            <ion-label [ngStyle]="{'color':days.month == activeMonthLabel ? 'black' : '#bbb'}" no-margin>{{days.day}}</ion-label>
+            <ion-label [ngClass]="{'active-month':days.month == activeMonthLabel,
+                                   'inactive-month':days.month != activeMonthLabel}" no-margin>{{days.day}}</ion-label>
           </div>
         </div>
       </div>

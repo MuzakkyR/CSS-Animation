@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import moment from "moment";
 import { daysInMonth } from 'ionic-angular/util/datetime-util';
@@ -11,6 +11,9 @@ import { daysInMonth } from 'ionic-angular/util/datetime-util';
 export class GdCalendarPage {
 
   @ViewChild('scrollView') scrollView: ElementRef;
+
+  @Output() startDates = new EventEmitter();
+  @Output() endDates = new EventEmitter();
 
   //new
   previousMonth: any;
@@ -58,6 +61,9 @@ export class GdCalendarPage {
   today: boolean = false;
   todayDate: any;
 
+  removedFirstWeek:any = [];
+  removedLastWeek:any = [];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams
@@ -67,7 +73,7 @@ export class GdCalendarPage {
     }
   }
 
-  checkDateEvents(current){
+  checkDateEvents(current) { //simpan state ketika scroll
     current.format("DDMMMMYYYY") == this.todayDate ? this.today = true : this.today = false;
     current.format("DDMMMMYYYY") == moment(this.startDate).format("DDMMMMYYYY") && this.startDate ? this.startSelected = true : this.startSelected = false;
     current.format("DDMMMMYYYY") == moment(this.endDate).format("DDMMMMYYYY") && this.endDate ? this.endSelected = true : this.endSelected = false;
@@ -128,6 +134,21 @@ export class GdCalendarPage {
     }
   }
 
+  getFirstWeekRemovedArray(){
+    let firstDayOfTheMonth = moment(this.prevActiveMonth).startOf("month"); // hari pertama 1 bulan sebelum
+    for (let index = 0; index < 7; index++) { // assign hari lain di minggu pertama ke array
+      this.removedFirstWeek.push({
+        day: moment(firstDayOfTheMonth).weekday(index).format("DD"),
+        month: moment(firstDayOfTheMonth).weekday(index).format("MMMM"),
+        year: moment(firstDayOfTheMonth).weekday(index).format("YYYY"),
+        start: this.startSelected,
+        end: this.endSelected,
+        between: this.betweenSelected,
+        today: this.today
+      })
+    }
+  }
+
   getLastWeekLoadedArray() {
     let lastDayOfTheMonth = moment(this.nextActiveMonth).endOf("month"); // hari terakhir 1 bulan setelah
     let nextMonthDaysInFirstWeek = moment(lastDayOfTheMonth).weekday();// hari pada bulan lain di minggu terakhir 1 bulan setelah
@@ -146,18 +167,15 @@ export class GdCalendarPage {
 
   joinAllMonthsArray() { // concat semua array
     this.currentLoadedMonth = this.firstWeek.concat(this.previousMonth.concat(this.currentMonth.concat(this.nextMonth.concat(this.lastWeek))))
-    this.currentLoadedMonth.forEach(element => {
-
-    });
   }
 
-  sliceMonthsArrayToWeeksArray() { // potong array jadi per minggu
+  sliceMonthsArrayToWeeksArray(array) { // potong array jadi per minggu
     let tempArray = [];
-    for (let index = 0; index < this.currentLoadedMonth.length; index += 7) {
-      let sliceGroup = this.currentLoadedMonth.slice(index, index + 7);
+    for (let index = 0; index < array.length; index += 7) {
+      let sliceGroup = array.slice(index, index + 7);
       tempArray.push(sliceGroup);
     }
-    this.weekArray = tempArray;
+    return tempArray;
   }
 
   defineActiveMonth() {
@@ -176,11 +194,12 @@ export class GdCalendarPage {
   resetWeek() {
     this.firstWeek = [];
     this.lastWeek = [];
+    this.removedFirstWeek = [];
+    this.removedLastWeek = [];
   }
 
   getAllCalendarData(params, month = null) {
     this.resetWeek();
-    this.defineActiveMonth();
     if (params == 'new') {
       this.setDaysArrayByMonth();
     } else if (params == 'update') {
@@ -189,11 +208,12 @@ export class GdCalendarPage {
     this.getFirstWeekLoadedArray();
     this.getLastWeekLoadedArray();
     this.joinAllMonthsArray();
-    this.sliceMonthsArrayToWeeksArray();
+    this.weekArray = this.sliceMonthsArrayToWeeksArray(this.currentLoadedMonth);
   }
 
   ngOnInit() {
     this.currentActiveMonth = moment();
+    this.defineActiveMonth();
     this.getAllCalendarData('new');
   }
 
@@ -202,12 +222,8 @@ export class GdCalendarPage {
     this.elementParent.scrollTop = this.checkMonthPosition(this.activeMonthId);
   }
 
-  toPrevMonth() {
-    this.elementParent.scrollTop = this.checkMonthPosition(this.prevMonthId);
-  }
-
-  toNextMonth() {
-    this.elementParent.scrollTop = this.checkMonthPosition(this.nextMonthId);
+  toMonth(params) {
+    params == 'prev' ? this.elementParent.scrollTop = this.checkMonthPosition(this.prevMonthId) : this.elementParent.scrollTop = this.checkMonthPosition(this.nextMonthId);
   }
 
   checkMonthPosition(monthId) {
@@ -215,14 +231,62 @@ export class GdCalendarPage {
   }
 
   onScroll() {
-    if (this.elementParent.scrollTop - this.checkMonthPosition(this.activeMonthId) > this.elementParent.clientHeight / 4) {
+    if (Math.floor((this.elementParent.scrollTop - this.checkMonthPosition(this.activeMonthId)) / 53) > Math.floor((this.elementParent.clientHeight / 53)/2.3)) {
       this.currentActiveMonth = this.nextActiveMonth; //scroll bawah
-      this.getAllCalendarData('update', 'nextMonth');
-      this.elementParent.scrollTop = this.checkMonthPosition(this.prevMonthId);
-    } else if (this.elementParent.scrollTop - this.checkMonthPosition(this.activeMonthId) < this.elementParent.clientHeight / -4) {
+      this.defineActiveMonth();
+      this.nextMonth = this.getDaysArrayByMonth(this.nextActiveMonth);
+      let removeIndex = 0;
+      this.nextMonth.forEach(element => {
+        this.lastWeek.forEach(elements => {
+          if(element.day == elements.day && element.month == elements.month){
+            removeIndex++;
+          }
+        });
+      });
+      for (let index = 0; index < removeIndex; index++) {
+        this.nextMonth.shift();        
+      }
+
+      this.resetWeek();
+
+      this.getLastWeekLoadedArray();
+      
+      let tempArray = this.sliceMonthsArrayToWeeksArray(this.nextMonth.concat(this.lastWeek.reverse()));
+
+      tempArray.forEach(element => {
+        this.weekArray.push(element);
+        this.weekArray.shift();
+      });
+
+      // this.getFirstWeekRemovedArray();
+      // this.weekArray.unshift(this.removedFirstWeek);      
+
+    } else if (Math.floor((this.elementParent.scrollTop - this.checkMonthPosition(this.activeMonthId)) / 53) < Math.floor((this.elementParent.clientHeight / 53)/-2.3)) {
       this.currentActiveMonth = this.prevActiveMonth; //scroll atas
-      this.getAllCalendarData('update', 'prevMonth');
-      this.elementParent.scrollTop = this.checkMonthPosition(this.nextMonthId);
+      this.defineActiveMonth();
+      this.previousMonth = this.getDaysArrayByMonth(this.prevActiveMonth);
+      let removeIndex = 0;
+      this.previousMonth.forEach(element => {
+        this.firstWeek.forEach(elements => {
+          if(element.day == elements.day && element.month == elements.month){
+            removeIndex++;
+          }          
+        });
+      });
+
+      for (let index = 0; index < removeIndex; index++) {
+        this.previousMonth.pop();        
+      }
+      this.resetWeek();
+      this.getFirstWeekLoadedArray();
+
+      let tempArray = this.sliceMonthsArrayToWeeksArray(this.firstWeek.concat(this.previousMonth))
+
+      tempArray.reverse().forEach(element => {
+        this.weekArray.unshift(element);
+        this.weekArray.pop();
+      });
+
     }
   }
 
@@ -255,6 +319,7 @@ export class GdCalendarPage {
         data.start = true;
         this.toggleStart = true;
         this.endDate = '';
+        this.endDates.emit(this.endDate);
         this.removeEndDate();
         this.removeInBetweenDate();
       }
@@ -270,6 +335,7 @@ export class GdCalendarPage {
         this.getInBetweenDate(data);
       } else {
         this.endDate = '';
+        this.endDates.emit(this.endDate);
         this.removeEndDate();
         this.removeInBetweenDate();
       }
@@ -282,6 +348,7 @@ export class GdCalendarPage {
     this.startDayNumber = data.day;
     this.startMonth = moment(this.startDate).format("MMM");
     this.startYear = data.year;
+    this.startDates.emit(this.startDate);
   }
 
   assignEndDate(data, currentDate) {
@@ -290,11 +357,24 @@ export class GdCalendarPage {
     this.endDayNumber = data.day;
     this.endMonth = moment(this.endDate).format("MMM");
     this.endYear = data.year;
+    this.endDates.emit(this.endDate);
   }
 
   resetAllSelectedDate(data) {
     this.startDate = '';
+    this.startDay = '';
+    this.startDayNumber = '';
+    this.startMonth = '';
+    this.startYear = '';
+    this.startDates.emit(this.startDate);
+
     this.endDate = '';
+    this.endDay = '';
+    this.endDayNumber = '';
+    this.endMonth = '';
+    this.endYear = '';
+    this.endDates.emit(this.endDate);
+
     data.start = false;
     data.end = false;
     this.toggleStart = false;

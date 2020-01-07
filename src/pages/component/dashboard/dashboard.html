@@ -18,7 +18,8 @@
     </div>
   </div>
   <div class="calendar">
-    <gd-calendar></gd-calendar>
+    <gd-calendar (startDates)="startDate = $event" (endDates)="endDate = $event"></gd-calendar>
+    {{startDate}} | {{endDate}}
   </div>
 
 </ion-content>
