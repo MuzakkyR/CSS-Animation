@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { DashboardPage } from './dashboard';
-import { GdCalendarPageModule } from '../../gd-calendar/gd-calendar.module';
+import { GdxCalendarPageModule } from '../../gdx-calendar/gdx-calendar.module';
 
 @NgModule({
   declarations: [
@@ -9,7 +9,7 @@ import { GdCalendarPageModule } from '../../gd-calendar/gd-calendar.module';
   ],
   imports: [
     IonicPageModule.forChild(DashboardPage),
-    GdCalendarPageModule
+    GdxCalendarPageModule
   ],
 })
 export class DashboardPageModule {}

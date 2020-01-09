@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { GdCalendarPage } from './gd-calendar';
+import { GdxCalendarPage } from './gdx-calendar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
-    GdCalendarPage,
+    GdxCalendarPage,
   ],
   imports: [
-    IonicPageModule.forChild(GdCalendarPage),
+    IonicPageModule.forChild(GdxCalendarPage),
     FlexLayoutModule,
   ],
   exports: [
-    GdCalendarPage
+    GdxCalendarPage
   ]
 })
-export class GdCalendarPageModule {}
+export class GdxCalendarPageModule {}

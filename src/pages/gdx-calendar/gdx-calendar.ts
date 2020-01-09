@@ -5,10 +5,10 @@ import { daysInMonth } from 'ionic-angular/util/datetime-util';
 
 @IonicPage()
 @Component({
-  selector: 'gd-calendar',
-  templateUrl: 'gd-calendar.html',
+  selector: 'gdx-calendar',
+  templateUrl: 'gdx-calendar.html',
 })
-export class GdCalendarPage {
+export class GdxCalendarPage {
 
   @ViewChild('scrollView') scrollView: ElementRef;
 
