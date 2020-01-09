@@ -49,11 +49,12 @@
           [ngClass]="{ 'startDate':days.start,
                         'endDate':days.end,
                         'startWrapper':days.start && !days.end && startDay && endDate,
-                        'endWrapper':days.end && endDate && !days.end,
+                        'endWrapper':days.end && endDate && !days.start,
                         'betweenWrapper': days.between,
                         'today': days.today}">
             <ion-label [ngClass]="{'active-month':days.month == activeMonthLabel,
-                                   'inactive-month':days.month != activeMonthLabel}" no-margin>{{days.day}}</ion-label>
+                                   'inactive-month':days.month != activeMonthLabel}"
+                                    no-margin>{{days.day}}</ion-label>
           </div>
         </div>
       </div>
