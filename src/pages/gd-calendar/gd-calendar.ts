@@ -66,7 +66,7 @@ export class GdCalendarPage {
 
   triggerScrollBottom: boolean = false;
 
-  fromDirection:any = 'netral';
+  fromDirection: any = 'netral';
 
 
   constructor(
@@ -92,7 +92,7 @@ export class GdCalendarPage {
       let current = moment(date).date(totalDaysInMonth);
       this.checkDateEvents(current);
       arrDays.unshift({
-        days:current.format("DDDD"),
+        days: current.format("dddd"),
         day: current.format("DD"),
         month: current.format("MMMM"),
         year: current.format("YYYY"),
@@ -130,40 +130,10 @@ export class GdCalendarPage {
     for (let index = 0; index < prevMonthDaysInFirstWeek; index++) { // assign hari lain di minggu pertama ke array
       this.checkDateEvents(moment(firstDayOfTheMonth).weekday(index));
       this.firstWeek.push({
-        days:moment(firstDayOfTheMonth).weekday(index).format("DDDD"),     
+        days: moment(firstDayOfTheMonth).weekday(index).format("dddd"),
         day: moment(firstDayOfTheMonth).weekday(index).format("DD"),
         month: moment(firstDayOfTheMonth).weekday(index).format("MMMM"),
         year: moment(firstDayOfTheMonth).weekday(index).format("YYYY"),
-        start: this.startSelected,
-        end: this.endSelected,
-        between: this.betweenSelected,
-        today: this.today
-      })
-    }
-  }
-
-  getFirstWeekRemovedArray() {
-    let firstDayOfTheMonth = moment(this.prevActiveMonth).startOf("month"); // hari pertama 1 bulan sebelum
-    for (let index = 0; index < 7; index++) { // assign hari lain di minggu pertama ke array
-      this.removedFirstWeek.push({
-        day: moment(firstDayOfTheMonth).weekday(index).format("DD"),
-        month: moment(firstDayOfTheMonth).weekday(index).format("MMMM"),
-        year: moment(firstDayOfTheMonth).weekday(index).format("YYYY"),
-        start: this.startSelected,
-        end: this.endSelected,
-        between: this.betweenSelected,
-        today: this.today
-      })
-    }
-  }
-
-  getLastWeekRemovedArray() {
-    let lastDayOfTheMonth = moment(this.nextActiveMonth).endOf("month"); // hari terakhir 1 bulan setelah
-    for (let index = 6; index > 0; index--) { // assign hari lain di minggu terakhir array
-      this.removedLastWeek.push({
-        day: moment(lastDayOfTheMonth).weekday(index).format("DD"),
-        month: moment(lastDayOfTheMonth).weekday(index).format("MMMM"),
-        year: moment(lastDayOfTheMonth).weekday(index).format("YYYY"),
         start: this.startSelected,
         end: this.endSelected,
         between: this.betweenSelected,
@@ -176,9 +146,9 @@ export class GdCalendarPage {
     let lastDayOfTheMonth = moment(this.nextActiveMonth).endOf("month"); // hari terakhir 1 bulan setelah
     let nextMonthDaysInFirstWeek = moment(lastDayOfTheMonth).weekday();
     for (let index = 6; index > nextMonthDaysInFirstWeek; index--) { // assign hari lain di minggu terakhir array
-      this.checkDateEvents(moment(lastDayOfTheMonth).weekday(index));      
+      this.checkDateEvents(moment(lastDayOfTheMonth).weekday(index));
       this.lastWeek.push({
-        days: moment(lastDayOfTheMonth).weekday(index).format("DDDD"),
+        days: moment(lastDayOfTheMonth).weekday(index).format("dddd"),
         day: moment(lastDayOfTheMonth).weekday(index).format("DD"),
         month: moment(lastDayOfTheMonth).weekday(index).format("MMMM"),
         year: moment(lastDayOfTheMonth).weekday(index).format("YYYY"),
@@ -257,52 +227,41 @@ export class GdCalendarPage {
 
   onScroll() {
     if (Math.floor((this.elementParent.scrollTop - this.checkMonthPosition(this.activeMonthId)) / 53) > Math.floor((this.elementParent.clientHeight / 53) / 2.3)) {
-      // if(this.fromDirection == 'down' || this.fromDirection == 'netral'){      
-        this.scrollBottomShiftArray();
-      // }
-
+      this.scrollBottomShiftArray();
       this.currentActiveMonth = this.nextActiveMonth; //scroll bawah
       this.defineActiveMonth();
       this.setDaysArrayByMonth();
       this.resetWeek();
-      // if(this.fromDirection == 'down' || this.fromDirection == 'netral'){
-        this.scrollBottomPushArray();
-      // }
+      this.scrollBottomPushArray();
       this.fromDirection = 'down';
 
-      console.log(this.weekArray, ' tsoraya')
 
     } else if (Math.floor((this.elementParent.scrollTop - this.checkMonthPosition(this.activeMonthId)) / 53) < Math.floor((this.elementParent.clientHeight / 53) / -2.3)) {
-      // if(this.fromDirection == 'up' || this.fromDirection == 'netral'){
-        this.scrollTopPopArray();
-      // }
+      this.scrollTopPopArray();
       this.currentActiveMonth = this.prevActiveMonth; //scroll atas
       this.defineActiveMonth();
       this.setDaysArrayByMonth();
       this.resetWeek();
-      // if(this.fromDirection == 'up' || this.fromDirection == 'netral'){
-        this.scrollTopPushArray()
-      // }
+      this.scrollTopPushArray()
       this.fromDirection = 'up';
-      console.log(this.weekArray, ' tsoraya');
     }
   }
 
-  scrollTopPushArray(){
-    let firstWeekArray:any;
-    let joinFirstWeek:any;
-    let angka:any = 0;
+  scrollTopPushArray() {
+    let firstWeekArray: any;
+    let joinFirstWeek: any;
+    let angka: any = 0;
     this.getFirstWeekLoadedArray();
     firstWeekArray = this.weekArray[0];
     firstWeekArray.forEach(daily => {
       this.previousMonth.forEach(nextDaily => {
-        if(daily.day + daily.month == nextDaily.day + nextDaily.month){
+        if (daily.day + daily.month == nextDaily.day + nextDaily.month) {
           angka++;
         }
       });
     });
     for (let index = 0; index < angka; index++) {
-      this.previousMonth.pop();      
+      this.previousMonth.pop();
     }
 
     joinFirstWeek = this.sliceMonthsArrayToWeeksArray(this.firstWeek.concat(this.previousMonth)).reverse();
@@ -331,39 +290,38 @@ export class GdCalendarPage {
     });
   }
 
-  scrollTopPopArray(){
+  scrollTopPopArray() {
     let afterNextMonth = this.nextMonth;
-    let checkNextMonth:boolean = false;
-    let checkNextMonths:boolean = false;
+    let checkNextMonth: boolean = false;
+    let checkNextMonths: boolean = false;
     let tempArray: any = [];
-    let nextMonthArray:any;
-    let angka = 0;
-    
+    let nextMonthArray: any;
+
     this.weekArray.forEach(weekly => {
       weekly.forEach(daily => {
         afterNextMonth.forEach(after => {
-          if(after.day+after.month == daily.day+daily.month){
+          if (after.day + after.month == daily.day + daily.month) {
             checkNextMonth = true;
           }
         });
       });
-      if(checkNextMonth){
+      if (checkNextMonth) {
         tempArray.push(weekly);
         checkNextMonth = false;
       }
     });
-    
+
     nextMonthArray = this.currentActiveMonth.format("MMMM");
     tempArray.forEach(elements => {
       elements.reverse().forEach(element => {
-        if(element.month != nextMonthArray){
+        if (element.month != nextMonthArray) {
           checkNextMonths = true;
-        } else{
+        } else {
           checkNextMonths = false;
         }
       });
       elements.reverse();
-      if(checkNextMonths){
+      if (checkNextMonths) {
         this.weekArray.pop();
         checkNextMonths = false;
       }
