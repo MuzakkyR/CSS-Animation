@@ -61,20 +61,12 @@ export class GdxCalendarPage {
   today: boolean = false;
   todayDate: any;
 
-  removedFirstWeek: any = [];
-  removedLastWeek: any = [];
-
-  triggerScrollBottom: boolean = false;
-
-  fromDirection: any = 'netral';
-
-
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams
   ) {
     for (let index = 0; index < 7; index++) {
-      this.dayList.push(moment(index, 'e').format('dd'));
+      this.dayList.push(moment(index, 'e').format('dd')); // inisial hari untuk table header
     }
   }
 
@@ -85,7 +77,7 @@ export class GdxCalendarPage {
     current.isBetween(this.startDate, this.endDate) ? this.betweenSelected = true : this.betweenSelected = false;
   }
 
-  getDaysArrayByMonth(date) { // mendapatkan array tanggal pada suatu bulan
+  getDaysArrayByMonth(date) { // mendapatkan array tanggal 1 bulan penuh
     let totalDaysInMonth = moment(date).daysInMonth();
     let arrDays = [];
     while (totalDaysInMonth) {
@@ -112,19 +104,7 @@ export class GdxCalendarPage {
     this.nextMonth = this.getDaysArrayByMonth(this.nextActiveMonth); // set array bulan setelah
   }
 
-  updateMonthArrays(params) { // dapetin bulan baru setelah scroll
-    if (params == 'nextMonth') {
-      this.previousMonth = this.currentMonth;
-      this.currentMonth = this.nextMonth;
-      this.nextMonth = this.getDaysArrayByMonth(this.nextActiveMonth);
-    } else if (params == 'prevMonth') {
-      this.nextMonth = this.currentMonth;
-      this.currentMonth = this.previousMonth;
-      this.previousMonth = this.getDaysArrayByMonth(this.prevActiveMonth);
-    }
-  }
-
-  getFirstWeekLoadedArray() {
+  getFirstWeekLoadedArray() { // get tambelan minggu pertama dibulan sebelum bulan aktif
     let firstDayOfTheMonth = moment(this.prevActiveMonth).startOf("month"); // hari pertama 1 bulan sebelum
     let prevMonthDaysInFirstWeek = moment(firstDayOfTheMonth).weekday(); // hari pada bulan lain di minggu pertama 1 bulan sebelum
     for (let index = 0; index < prevMonthDaysInFirstWeek; index++) { // assign hari lain di minggu pertama ke array
@@ -142,7 +122,7 @@ export class GdxCalendarPage {
     }
   }
 
-  getLastWeekLoadedArray() {
+  getLastWeekLoadedArray() { // get tambelan minggu terakhir dibulan setelah bulan aktif
     let lastDayOfTheMonth = moment(this.nextActiveMonth).endOf("month"); // hari terakhir 1 bulan setelah
     let nextMonthDaysInFirstWeek = moment(lastDayOfTheMonth).weekday();
     for (let index = 6; index > nextMonthDaysInFirstWeek; index--) { // assign hari lain di minggu terakhir array
@@ -189,17 +169,11 @@ export class GdxCalendarPage {
   resetWeek() {
     this.firstWeek = [];
     this.lastWeek = [];
-    this.removedFirstWeek = [];
-    this.removedLastWeek = [];
   }
 
-  getAllCalendarData(params, month = null) {
+  getAllCalendarData() {
     this.resetWeek();
-    if (params == 'new') {
-      this.setDaysArrayByMonth();
-    } else if (params == 'update') {
-      this.updateMonthArrays(month);
-    }
+    this.setDaysArrayByMonth();
     this.getFirstWeekLoadedArray();
     this.getLastWeekLoadedArray();
     this.joinAllMonthsArray();
@@ -209,7 +183,7 @@ export class GdxCalendarPage {
   ngOnInit() {
     this.currentActiveMonth = moment();
     this.defineActiveMonth();
-    this.getAllCalendarData('new');
+    this.getAllCalendarData();
   }
 
   ngAfterViewInit() {
@@ -227,23 +201,20 @@ export class GdxCalendarPage {
 
   onScroll() {
     if (Math.floor((this.elementParent.scrollTop - this.checkMonthPosition(this.activeMonthId)) / 53) > Math.floor((this.elementParent.clientHeight / 53) / 2.3)) {
-      this.scrollBottomShiftArray();
+      this.scrollBottomShiftArray(); // hapus array bulan paling depan
       this.currentActiveMonth = this.nextActiveMonth; //scroll bawah
       this.defineActiveMonth();
       this.setDaysArrayByMonth();
       this.resetWeek();
-      this.scrollBottomPushArray();
-      this.fromDirection = 'down';
-
+      this.scrollBottomPushArray(); // tambah array bulan paling belakang
 
     } else if (Math.floor((this.elementParent.scrollTop - this.checkMonthPosition(this.activeMonthId)) / 53) < Math.floor((this.elementParent.clientHeight / 53) / -2.3)) {
-      this.scrollTopPopArray();
+      this.scrollTopPopArray(); // hapus array bulan paling belakang
       this.currentActiveMonth = this.prevActiveMonth; //scroll atas
       this.defineActiveMonth();
       this.setDaysArrayByMonth();
       this.resetWeek();
-      this.scrollTopPushArray()
-      this.fromDirection = 'up';
+      this.scrollTopPushArray() // tambah array bulan paling depan
     }
   }
 
