@@ -206,7 +206,7 @@ export class GdxCalendarPage {
   }
 
   onScroll() {
-    if (Math.floor((this.elementParent.scrollTop - this.checkMonthPosition(this.activeMonthId)) / 53) > Math.floor((this.elementParent.clientHeight / 53) / 2.3)) {
+    if ((this.elementParent.scrollTop - this.checkMonthPosition(this.activeMonthId)) / 49 > (this.elementParent.clientHeight / 49) / 2) {
       this.scrollBottomShiftArray(); // hapus array bulan paling depan
       this.currentActiveMonth = this.nextActiveMonth; //scroll bawah
       this.defineActiveMonth();
@@ -214,7 +214,7 @@ export class GdxCalendarPage {
       this.resetWeek();
       this.scrollBottomPushArray(); // tambah array bulan paling belakang
 
-    } else if (Math.floor((this.elementParent.scrollTop - this.checkMonthPosition(this.activeMonthId)) / 53) < Math.floor((this.elementParent.clientHeight / 53) / -2.3)) {
+    } else if ((this.elementParent.scrollTop - this.checkMonthPosition(this.activeMonthId)) / 49 < (this.elementParent.clientHeight / 49) / -2) {
       this.scrollTopPopArray(); // hapus array bulan paling belakang
       this.currentActiveMonth = this.prevActiveMonth; //scroll atas
       this.defineActiveMonth();

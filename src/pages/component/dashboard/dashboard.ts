@@ -17,9 +17,9 @@ export class DashboardPage {
 
   linkPage:any = [];
   
-  startDate:any = 'belum dipilih';
-  endDate:any = 'belum dipilih';
-  selectedDate:any = 'belum dipilih';
+  startDate:any;
+  endDate:any;
+  selectedDate:any;
 
 
   constructor(
@@ -110,7 +110,7 @@ export class DashboardPage {
   }
 
   openCalendar(params){
-    let modal = this.modalCtrl.create('GdxCalendarPage', { mode:params });
+    let modal = this.modalCtrl.create('GdxCalendarPage', { mode:params }, {cssClass: 'modal'});
     modal.present();
     modal.onDidDismiss( result => {
       if(result){

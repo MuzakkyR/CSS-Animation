@@ -17,12 +17,28 @@
 
 .modal{
     background-color: rgba(black, .6);
+    position: relative;
+    .modal-wrapper{
+        width: 90%;
+        height: 92%;
+        border-radius: 3px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) !important;
+    }
     .ion-page {
-        left: 5% !important;
-        width: 90% !important;
-        max-width: 400px;
-        height: 96%;
-        top: 2%;
-        border-radius: 10px 10px 0 0;
-      }
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    @media screen and (min-width: $tablet-min-width) {
+        .modal-wrapper{
+            max-width: 360px;
+            max-height: 600px;
+        }
+    }
+
+
 }

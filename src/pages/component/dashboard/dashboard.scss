@@ -8,7 +8,7 @@ page-dashboard {
     .calendar{
         margin-bottom: 100px;        
         .input{
-            border:1.2px solid rgba(black, .2);
+            border:1px solid rgba(black, .2);
             width: fit-content;
             padding: 8px;
             border-radius: 5px;
@@ -17,6 +17,7 @@ page-dashboard {
                 width: 110px;
             }
             ion-icon{
+                color: rgba(black, .4);
                 font-size: 20px;
             }
         }

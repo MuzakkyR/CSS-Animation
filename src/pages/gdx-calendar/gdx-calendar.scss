@@ -4,6 +4,7 @@ gdx-calendar {
     border-radius: 6px;
     background-color: white;
     width: 100%;
+    height: 100%;
     .range-box{
       padding: 16px;
       background-color: darken(#FBAC5E, 10%);
@@ -22,6 +23,7 @@ gdx-calendar {
         margin-bottom: 8px;
         height: 50px;
         .date-range{
+          height: 100%;
           .date-number{
             color: #fff;
             font-size: 38px;
@@ -30,7 +32,7 @@ gdx-calendar {
           .detail-box{
             .month-year{
               color: #fff;
-              margin-bottom: 2px;
+              margin-bottom: 3px;
             }
             .date-day{
               font-size: 12px;
@@ -44,16 +46,15 @@ gdx-calendar {
           margin: 0 10px;
         }
       }
-      .time-box{
-        .time-section{
-          border-radius: 200px;
-          width: 68px;
-          height: 29px;
-          background-color:darken(#FBAC5E, 20%);          
-          ion-label{
-            color: #fff !important; 
-            text-align: center;
-          }
+      .time-section{
+        border-radius: 4px;
+        width: 68px;
+        height: 40px;
+        background-color:darken(#FBAC5E, 20%);     
+        margin-left: 16px;     
+        ion-label{
+          color: #fff !important; 
+          text-align: center;
         }
       }
     }
@@ -82,11 +83,11 @@ gdx-calendar {
         }
       }
       .GdCalendar_date{
-          height: 270px;
+          height: 245px;
           overflow:auto;
           position: relative;
         .GdCalendar_week{
-          margin: 5px 0;
+          margin: 3px 0;
           border-radius: 200px;
           overflow-y: visible;
           overflow-x: hidden;
