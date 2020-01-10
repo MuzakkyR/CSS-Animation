@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 /**
  * Generated class for the DashboardPage page.
@@ -19,7 +19,11 @@ export class DashboardPage {
   startDate:any = 'belum dipilih';
   endDate:any = 'belum dipilih';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
+  ) {
 
     this.linkPage = [
       {
@@ -100,6 +104,11 @@ export class DashboardPage {
 
   toLink(url:string){
     this.navCtrl.push(url);
+  }
+
+  openCalendar(params){
+    let modal = this.modalCtrl.create('GdxCalendarPage', { mode:params }, {cssClass: 'modal'});
+    modal.present();
   }
 
 }

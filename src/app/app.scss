@@ -14,3 +14,15 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.modal{
+    background-color: rgba(black, .6);
+    .ion-page {
+        left: 5% !important;
+        width: 90% !important;
+        max-width: 400px;
+        height: 96%;
+        top: 2%;
+        border-radius: 10px 10px 0 0;
+      }
+}

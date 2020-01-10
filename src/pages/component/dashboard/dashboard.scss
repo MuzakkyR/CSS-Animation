@@ -7,6 +7,19 @@ page-dashboard {
 
     .calendar{
         margin-bottom: 100px;        
+        .single-input{
+            border:1.2px solid rgba(black, .2);
+            width: fit-content;
+            padding: 8px;
+            border-radius: 5px;
+            input{
+                border:none;
+                width: 100px;
+            }
+            ion-icon{
+                font-size: 20px;
+            }
+        }
     }
 
 

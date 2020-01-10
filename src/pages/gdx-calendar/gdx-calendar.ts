@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import moment from "moment";
 import { daysInMonth } from 'ionic-angular/util/datetime-util';
@@ -14,6 +14,7 @@ export class GdxCalendarPage {
 
   @Output() startDates = new EventEmitter();
   @Output() endDates = new EventEmitter();
+  // @Input() Mode:any = 'single';
 
   //new
   previousMonth: any;
@@ -61,6 +62,8 @@ export class GdxCalendarPage {
   today: boolean = false;
   todayDate: any;
 
+  mode:any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams
@@ -68,6 +71,8 @@ export class GdxCalendarPage {
     for (let index = 0; index < 7; index++) {
       this.dayList.push(moment(index, 'e').format('dd')); // inisial hari untuk table header
     }
+    this.mode = navParams.get('mode');
+    console.log(this.mode, ' tsoraya')
   }
 
   checkDateEvents(current) { //simpan state ketika scroll

@@ -18,8 +18,12 @@
     </div>
   </div>
   <div class="calendar">
-    <gdx-calendar (startDates)="startDate = $event" (endDates)="endDate = $event"></gdx-calendar>
-    {{startDate}} | {{endDate}}
+    <div class="single-input" (click)="openCalendar('single')" fxLayout="row" fxLayoutGap="6px">
+      <input type="text">
+      <ion-icon name="calendar"></ion-icon>
+    </div>
+    <button ion-button (click)="openCalendar()">Calendar</button>
+    <!-- <gdx-calendar (startDates)="startDate = $event" (endDates)="endDate = $event"></gdx-calendar> -->
   </div>
 
 </ion-content>
