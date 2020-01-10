@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import moment from "moment";
 import { daysInMonth } from 'ionic-angular/util/datetime-util';
 
@@ -66,7 +66,8 @@ export class GdxCalendarPage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public viewCtrl: ViewController
   ) {
     for (let index = 0; index < 7; index++) {
       this.dayList.push(moment(index, 'e').format('dd')); // inisial hari untuk table header
@@ -342,43 +343,56 @@ export class GdxCalendarPage {
 
   selectDate(data) {
     let currentDate = data.day + '-' + data.month + '-' + data.year;
-    if (!this.toggleStart) { // klik tanggal 1x untuk dapat start date
-      data.start = true;
-      this.toggleStart = true;
-      this.assignStartDate(data, currentDate);
-    }
-    else if (this.toggleStart && this.startDate == currentDate && !this.toggleSameDay) { // klik tanggal 2x di hari yg sama untuk dapat end date
-      this.removeEndDate();
-      data.end = true;
-      this.toggleSameDay = true;
-      this.assignEndDate(data, currentDate);
-      this.removeInBetweenDate();
-      this.toggleEnd = true;
-    }
-    else if (this.startDate == currentDate && this.endDate == currentDate && this.toggleSameDay) { //klik tanggal 3x di hari yg sama untuk reset
-      this.resetAllSelectedDate(data);
-    }
-    else if (this.toggleStart && !this.toggleEnd) { // mendapatkan end date di hari yang berbeda dengan start date
-      this.assignEndDate(data, currentDate);
-      if (moment(this.startDate).isBefore(this.endDate)) { // check kalo start date sebelum end date
-        data.end = true;
-        this.getInBetweenDate(data);
-      } else { // ketika end date di klik sebelum start date maka berubah jadi start date
-        this.removeStartDate();
-        this.assignStartDate(data, currentDate);
+    if(this.mode == 'multi'){
+      if (!this.toggleStart) { // klik tanggal 1x untuk dapat start date
         data.start = true;
         this.toggleStart = true;
-        this.endDate = '';
-        this.endDates.emit(this.endDate);
-        this.removeEndDate();
-        this.removeInBetweenDate();
+        this.assignStartDate(data, currentDate);
       }
-    }
-    else if (this.toggleStart && this.toggleEnd || this.toggleSameDay) { // mendapatkan end date ketika end date sudah terdefinisi di hari yang sama dengan start date
-      this.resetAllSelectedDate(data);
-      data.start = true;
-      this.toggleStart = true;
-      this.assignStartDate(data, currentDate);
+      else if (this.toggleStart && this.startDate == currentDate && !this.toggleSameDay) { // klik tanggal 2x di hari yg sama untuk dapat end date
+        this.removeEndDate();
+        data.end = true;
+        this.toggleSameDay = true;
+        this.assignEndDate(data, currentDate);
+        this.removeInBetweenDate();
+        this.toggleEnd = true;
+      }
+      else if (this.startDate == currentDate && this.endDate == currentDate && this.toggleSameDay) { //klik tanggal 3x di hari yg sama untuk reset
+        this.resetAllSelectedDate(data);
+      }
+      else if (this.toggleStart && !this.toggleEnd) { // mendapatkan end date di hari yang berbeda dengan start date
+        this.assignEndDate(data, currentDate);
+        if (moment(this.startDate).isBefore(this.endDate)) { // check kalo start date sebelum end date
+          data.end = true;
+          this.getInBetweenDate(data);
+        } else { // ketika end date di klik sebelum start date maka berubah jadi start date
+          this.removeStartDate();
+          this.assignStartDate(data, currentDate);
+          data.start = true;
+          this.toggleStart = true;
+          this.endDate = '';
+          this.endDates.emit(this.endDate);
+          this.removeEndDate();
+          this.removeInBetweenDate();
+        }
+      }
+      else if (this.toggleStart && this.toggleEnd || this.toggleSameDay) { // mendapatkan end date ketika end date sudah terdefinisi di hari yang sama dengan start date
+        this.resetAllSelectedDate(data);
+        data.start = true;
+        this.toggleStart = true;
+        this.assignStartDate(data, currentDate);
+      }
+    } else{
+      if (!this.toggleStart) { // klik tanggal 1x untuk dapat start date
+        data.start = true;
+        this.toggleStart = true;
+        this.assignStartDate(data, currentDate);
+      } else{
+        this.resetAllSelectedDate(data);
+        data.start = true;
+        this.toggleStart = true;
+        this.assignStartDate(data, currentDate);
+      }
     }
   }
 
@@ -462,5 +476,20 @@ export class GdxCalendarPage {
       });
     });
     this.toggleStart = false;
+  }
+
+  submit(){
+    if(this.mode == 'single'){
+      this.viewCtrl.dismiss(this.startDate)
+    } else{
+      this.viewCtrl.dismiss({
+        start:this.startDate,
+        end: this.endDate
+      })
+    }
+  }
+
+  closeModal(){
+    this.viewCtrl.dismiss();
   }
 }

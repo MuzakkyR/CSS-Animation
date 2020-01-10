@@ -16,8 +16,11 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 export class DashboardPage {
 
   linkPage:any = [];
+  
   startDate:any = 'belum dipilih';
   endDate:any = 'belum dipilih';
+  selectedDate:any = 'belum dipilih';
+
 
   constructor(
     public navCtrl: NavController, 
@@ -109,6 +112,16 @@ export class DashboardPage {
   openCalendar(params){
     let modal = this.modalCtrl.create('GdxCalendarPage', { mode:params }, {cssClass: 'modal'});
     modal.present();
+    modal.onDidDismiss( result => {
+      if(result){
+        if(params == 'single'){
+          this.selectedDate = result;
+        } else if(params == 'multi'){
+          this.startDate = result.start;
+          this.endDate = result.end
+        }
+      }
+    })
   }
 
 }

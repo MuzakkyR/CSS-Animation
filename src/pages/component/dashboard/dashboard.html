@@ -18,11 +18,23 @@
     </div>
   </div>
   <div class="calendar">
-    <div class="single-input" (click)="openCalendar('single')" fxLayout="row" fxLayoutGap="6px">
-      <input type="text">
+    <h1>Single Input</h1>
+    <div class="input" (click)="openCalendar('single')" fxLayout="row">
+      <input [(ngModel)]="selectedDate" type="text">
       <ion-icon name="calendar"></ion-icon>
     </div>
-    <button ion-button (click)="openCalendar()">Calendar</button>
+    <h1>Multi Input</h1>
+    <div class="input-wrapper" fxLayout="row">
+      <div class="input" (click)="openCalendar('multi')" fxLayout="row" fxLayoutGap="6px">
+        <input [(ngModel)]="startDate" type="text">
+        <ion-icon name="calendar"></ion-icon>
+      </div>
+      <div class="input" (click)="openCalendar('multi')" fxLayout="row" fxLayoutGap="6px">
+        <input [(ngModel)]="endDate" type="text">
+        <ion-icon name="calendar"></ion-icon>
+      </div>
+    </div>
+    <!-- <button ion-button (click)="openCalendar()">Calendar</button> -->
     <!-- <gdx-calendar (startDates)="startDate = $event" (endDates)="endDate = $event"></gdx-calendar> -->
   </div>
 
