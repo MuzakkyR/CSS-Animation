@@ -1,10 +1,15 @@
 <div class="calendar-container" fxLayout="column">
-  <div class="GdCalendar_header" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
-    <ion-label fxFlex="">{{activeMonthLabel}} {{activeYearLabel}}</ion-label>
+  <div class="GdCalendar_header" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" *ngIf="viewState == 'datepicker'">
+    <ion-label fxFlex="" (click)="viewState = 'monthpicker'">{{activeMonthLabel}} {{activeYearLabel}}</ion-label>
     <ion-icon fxFlex="none" (click)="toMonth('prev')" name="ios-arrow-up-outline"></ion-icon>
     <ion-icon fxFlex="none" (click)="toMonth('next')" name="ios-arrow-down-outline"></ion-icon>
   </div>
-  <div class="GdCalendar_month">
+  <div class="GdCalendar_header" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" *ngIf="viewState == 'monthpicker'">
+    <ion-label fxFlex="" (click)="viewState = 'datepicker'">{{activeYearLabel}}</ion-label>
+    <ion-icon fxFlex="none" (click)="toMonth('prev')" name="ios-arrow-up-outline"></ion-icon>
+    <ion-icon fxFlex="none" (click)="toMonth('next')" name="ios-arrow-down-outline"></ion-icon>
+  </div>
+  <div class="GdCalendar_month"  [hidden]="viewState != 'datepicker'">
     <div class="GdCalendar-headbox" fxLayout="row">
       <div class="GdCalendar_head" *ngFor="let item of dayList" fxLayout="row" fxLayoutAlign="center center">
         {{item}}
@@ -28,6 +33,12 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="GdCalendar_month" [hidden]="viewState != 'monthpicker'">
+    <div class="grid-month" fxLayout="row" fxLayoutAlign="center">
+      <ion-label *ngFor="let month of monthList" fxLayout="row" fxLayoutAlign="center center" (click)="toSelectMonth(month)" 
+      [ngClass]="{'month-active' : month == activeMonthLabel}" no-margin>{{month}}</ion-label>
     </div>
   </div>
   <div class="range-box" *ngIf="mode == 'multi'">

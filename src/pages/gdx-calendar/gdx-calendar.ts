@@ -38,6 +38,7 @@ export class GdxCalendarPage {
 
   weekArray: any = [];
   dayList: any = [];
+  monthList:any = [];
 
   elementParent: any;
 
@@ -63,6 +64,7 @@ export class GdxCalendarPage {
   todayDate: any;
 
   mode:any;
+  viewState:any = 'datepicker';
 
   constructor(
     public navCtrl: NavController,
@@ -72,8 +74,10 @@ export class GdxCalendarPage {
     for (let index = 0; index < 7; index++) {
       this.dayList.push(moment(index, 'e').format('dd')); // inisial hari untuk table header
     }
+    for (let index = 0; index < 12; index++) {
+      this.monthList.push(moment().month(index).format("MMMM"))      
+    }
     this.mode = navParams.get('mode');
-    console.log(this.mode, ' tsoraya')
   }
 
   checkDateEvents(current) { //simpan state ketika scroll
@@ -476,6 +480,13 @@ export class GdxCalendarPage {
       });
     });
     this.toggleStart = false;
+  }
+
+  toSelectMonth(destination){
+    this.viewState = 'datepicker';
+    this.currentActiveMonth = moment().month(destination);
+    this.defineActiveMonth();
+    this.getAllCalendarData();
   }
 
   submit(){
