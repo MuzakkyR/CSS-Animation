@@ -30,11 +30,10 @@
       </div>
     </div>
   </div>
-  <div class="range-box">
+  <div class="range-box" *ngIf="mode == 'multi'">
     <div class="title-box" fxLayout="row" fxLayoutAlign="space-between center">
-      <ion-label *ngIf="mode == 'multi'" no-margin>Start Date</ion-label>
-      <ion-label *ngIf="mode == 'multi'" no-margin>End Date</ion-label>
-      <ion-label *ngIf="mode == 'single'" no-margin>Selected Date</ion-label>
+      <ion-label no-margin>Start Date</ion-label>
+      <ion-label no-margin>End Date</ion-label>
     </div>
     <div class="data-box" fxLayout="row" fxLayoutAlign="space-between center">
       <div *ngIf="startDay" class="date-range" fxLayout="row" fxLayoutAlign="start center">
@@ -57,11 +56,30 @@
       <div class="time-section" fxLayout="row" fxLayoutAlign="center center">
         <ion-label no-margin>08:00</ion-label>
       </div>
-      <div class="time-section" *ngIf="mode == 'multi'" fxLayout="row" fxLayoutAlign="center center">
+      <div class="time-section" fxLayout="row" fxLayoutAlign="center center">
         <ion-label no-margin>08:00</ion-label>
       </div>
     </div>
   </div>
+  <div class="range-box" *ngIf="mode == 'single'">
+      <div class="title-box" fxLayout="row" fxLayoutAlign="space-between center">
+        <ion-label *ngIf="mode == 'single'" no-margin>Selected Date</ion-label>
+      </div>
+      <div class="data-box" fxLayout="row" fxLayoutAlign="space-between center">
+        <div *ngIf="startDay" class="date-range" fxLayout="row" fxLayoutAlign="start center">
+          <ion-label class="date-number" no-margin>{{startDayNumber}}</ion-label>
+          <div class="detail-box">
+            <ion-label class="month-year" no-margin>{{startMonth}} {{startYear}}</ion-label>
+            <ion-label class="date-day" no-margin>{{startDay}}</ion-label>
+          </div>
+        </div>
+      </div>
+      <div class="time-box" fxLayoutAlign="space-between center">
+        <div class="time-section" fxLayout="row" fxLayoutAlign="center center">
+          <ion-label no-margin>08:00</ion-label>
+        </div>
+      </div>
+    </div>
   <div class="confirm-box" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
     <button ion-button (click)="closeModal()" outline>Cancel</button>
     <button *ngIf="mode == 'single'" [disabled]="!startDate" (click)="submit()" ion-button>ok</button>

@@ -110,7 +110,7 @@ export class DashboardPage {
   }
 
   openCalendar(params){
-    let modal = this.modalCtrl.create('GdxCalendarPage', { mode:params }, {cssClass: 'modal'});
+    let modal = this.modalCtrl.create('GdxCalendarPage', { mode:params });
     modal.present();
     modal.onDidDismiss( result => {
       if(result){
