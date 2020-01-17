@@ -1,0 +1,35 @@
+gdx-table {
+    .container{
+        background-color: #F6F8FA;
+        table{
+            th{
+                font-size: 16px;
+                font-family: 'bold';
+                color: #C7CFDB;
+            }
+            td{
+                font-size: 20px;
+                font-family: 'bold';
+                color: #AAAAAA;
+                padding: 23px 33px;            
+            }
+            td.first-col{
+                color: #121212 !important;
+            }
+            .gdx-row{
+                background-color: white;
+                margin-bottom: 16px;
+            }
+            .divider{
+                background-color: transparent;
+                height: 16px;
+            }
+        }
+        .outline{
+            border:1px solid red;
+            background-color: white;
+            color: red;
+            box-shadow: none;
+        }
+    }
+}

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { DashboardPage } from './dashboard';
 import { GdxCalendarPageModule } from '../../gdx-calendar/gdx-calendar.module';
+import { GdxTablePageModule } from '../../gdx-table/gdx-table.module';
 
 @NgModule({
   declarations: [
@@ -9,7 +10,8 @@ import { GdxCalendarPageModule } from '../../gdx-calendar/gdx-calendar.module';
   ],
   imports: [
     IonicPageModule.forChild(DashboardPage),
-    GdxCalendarPageModule
+    GdxCalendarPageModule,
+    GdxTablePageModule
   ],
 })
 export class DashboardPageModule {}
